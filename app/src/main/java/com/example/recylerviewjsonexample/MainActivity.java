@@ -61,9 +61,9 @@ public class MainActivity extends AppCompatActivity {
             {"name": "Electrician",
         "image": "https://i.ibb.co/0s1K0fH/flash.png",
             }*/
-                                    String likeCount = hit.getString("name");
+                                    String count = hit.getString("name");
 
-                                    mExampleList.add(new ExampleItem(imageUrl, likeCount));
+                                    mExampleList.add(new ExampleItem(imageUrl, count));
 
                             }
 
