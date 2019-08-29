@@ -2,14 +2,14 @@ package com.example.recylerviewjsonexample;
 
 public class ExampleItem {
     private String mImageUrl;
-    private String mCreator;
-    private int mLikes;
+
+    private String mLikes;
 
 
 
-    public ExampleItem(String imageUrl, String creator,int likes) {
-        mImageUrl = imageUrl;
-        mCreator = creator;
+    public ExampleItem(String Url,String likes) {
+        mImageUrl = Url;
+
         mLikes = likes;
 
     }
@@ -18,13 +18,9 @@ public class ExampleItem {
     }
 
 
-    public String getCreator()
-    {
-        return mCreator;
-    }
 
 
-    public int getLikeCount() {
+    public String getLikeCount() {
         return mLikes;
     }
 

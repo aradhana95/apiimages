@@ -34,10 +34,10 @@ import java.util.ArrayList;
             ExampleItem currentItem = mExampleList.get(position);
 
             String imageUrl = currentItem.getImageUrl();
-            String creatorName = currentItem.getCreator();
-            int likeCount = currentItem.getLikeCount();
+            //String creatorName = currentItem.getCreator();
+            String likeCount = currentItem.getLikeCount();
 
-            holder.mTextViewCreator.setText(creatorName);
+           //holder.mTextViewCreator.setText(creatorName);
             holder.mTextViewLikes.setText("Likes: " + likeCount);
             Picasso.with(mContext).load(imageUrl).fit().centerInside().into(holder.mImageView);
         }
@@ -49,13 +49,13 @@ import java.util.ArrayList;
 
         public class ExampleViewHolder extends RecyclerView.ViewHolder {
             public ImageView mImageView;
-            public TextView mTextViewCreator;
+           // public TextView mTextViewCreator;
             public TextView mTextViewLikes;
 
             public ExampleViewHolder(View itemView) {
                 super(itemView);
                 mImageView = itemView.findViewById(R.id.image_view);
-                mTextViewCreator = itemView.findViewById(R.id.text_view_creator);
+               // mTextViewCreator = itemView.findViewById(R.id.text_view_creator);
                 mTextViewLikes = itemView.findViewById(R.id.text_view_likes);
             }
         }

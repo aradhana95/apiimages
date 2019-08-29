@@ -11,6 +11,7 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 
@@ -43,31 +44,45 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void parseJSON() {
-        String url = "https://pixabay.com/api/?key=5303976-fd6581ad4ac165d1b75cc15b3&q=kitten&image_type=photo&pretty=true";
+        String url = "https://7hs6v5qhs4.execute-api.ap-south-1.amazonaws.com/qa/allsubcategory/5d5e94a23758ba00072181da";
 
-        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
-                new Response.Listener<JSONObject>() {
+        final JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, url, null,
+                new Response.Listener<JSONArray>() {
                     @Override
-                    public void onResponse(JSONObject response) {
+                    public void onResponse(JSONArray response) {
                         try {
-                            JSONArray jsonArray = response.getJSONArray("hits");
 
-                            for (int i = 0; i < jsonArray.length(); i++) {
-                                JSONObject hit = jsonArray.getJSONObject(i);
 
-                                String creatorName = hit.getString("user");
-                                String imageUrl = hit.getString("webformatURL");
-                                int likeCount = hit.getInt("likes");
+                            for (int i = 0; i < response.length(); i++) {
+                                JSONObject hit = response.getJSONObject(i);
 
-                                mExampleList.add(new ExampleItem(imageUrl, creatorName, likeCount));
+                                String imageinfo = hit.getString("productImage");
+
+                                JSONArray infoarray = new JSONArray(imageinfo);
+                                for (int j = 0; j < infoarray.length(); j++) {
+
+                                    JSONObject completeinfo = infoarray.getJSONObject(j);
+
+
+                                    String imageUrl = completeinfo.getString("productImageName");/*  "productImage": [
+            {
+                "_id": "5d5f3c0ec51c8f00077ec3c4",
+                "productImageName": "https://www.dropbox.com/sh/ch3ch2kdowefh9w/AACG0LZo3r0wTZ4g_eNsBkT2a/PRP5740.jpg?raw=1"
+            }*/
+                                    String likeCount = completeinfo.getString("_id");
+
+                                    mExampleList.add(new ExampleItem(imageUrl, likeCount));
+                                }
                             }
 
                             mExampleAdapter = new ExampleAdapter(MainActivity.this, mExampleList);
                             mRecyclerView.setAdapter(mExampleAdapter);
 
+
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
+
                     }
                 }, new Response.ErrorListener() {
             @Override
