@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void parseJSON() {
-        String url = "https://7hs6v5qhs4.execute-api.ap-south-1.amazonaws.com/qa/allsubcategory/5d5e94a23758ba00072181da";
+        String url = "https://putatoe.herokuapp.com/api/v1/service";
 
         final JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, url, null,
                 new Response.Listener<JSONArray>() {
@@ -56,23 +56,15 @@ public class MainActivity extends AppCompatActivity {
                             for (int i = 0; i < response.length(); i++) {
                                 JSONObject hit = response.getJSONObject(i);
 
-                                String imageinfo = hit.getString("productImage");
-
-                                JSONArray infoarray = new JSONArray(imageinfo);
-                                for (int j = 0; j < infoarray.length(); j++) {
-
-                                    JSONObject completeinfo = infoarray.getJSONObject(j);
-
-
-                                    String imageUrl = completeinfo.getString("productImageName");/*  "productImage": [
-            {
-                "_id": "5d5f3c0ec51c8f00077ec3c4",
-                "productImageName": "https://www.dropbox.com/sh/ch3ch2kdowefh9w/AACG0LZo3r0wTZ4g_eNsBkT2a/PRP5740.jpg?raw=1"
+                                String imageUrl = hit.getString("image");
+                                /*
+            {"name": "Electrician",
+        "image": "https://i.ibb.co/0s1K0fH/flash.png",
             }*/
-                                    String likeCount = completeinfo.getString("_id");
+                                    String likeCount = hit.getString("name");
 
                                     mExampleList.add(new ExampleItem(imageUrl, likeCount));
-                                }
+
                             }
 
                             mExampleAdapter = new ExampleAdapter(MainActivity.this, mExampleList);
