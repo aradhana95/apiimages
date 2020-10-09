@@ -44,45 +44,41 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void parseJSON() {
-        String url = "https://putatoe.herokuapp.com/api/v1/service";
+       // String url = "https://putatoe.herokuapp.com/api/v1/service";
 
-        final JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, url, null,
-                new Response.Listener<JSONArray>() {
-                    @Override
-                    public void onResponse(JSONArray response) {
-                        try {
+       // final JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, url, null,
 
 
-                            for (int i = 0; i < response.length(); i++) {
-                                JSONObject hit = response.getJSONObject(i);
 
-                                String imageUrl = hit.getString("image");
-                                /*
-            {"name": "Electrician",
-        "image": "https://i.ibb.co/0s1K0fH/flash.png",
-            }*/
-                                    String count = hit.getString("name");
 
-                                    mExampleList.add(new ExampleItem(imageUrl, count));
 
-                            }
+                                    mExampleList.add(new ExampleItem("imageUrl", "count"));
+        mExampleList.add(new ExampleItem("arad", "counhanat"));
+        mExampleList.add(new ExampleItem("abhi", "nav"));
+        mExampleList.add(new ExampleItem("abhi", "nav"));
+        mExampleList.add(new ExampleItem("abhi", "nav"));
+        mExampleList.add(new ExampleItem("abhi", "nav"));
+        mExampleList.add(new ExampleItem("abhi", "nav"));
+        mExampleList.add(new ExampleItem("abhi", "nav"));
+        mExampleList.add(new ExampleItem("abhi", "nav"));
+        mExampleList.add(new ExampleItem("abhi", "nav"));
+        mExampleList.add(new ExampleItem("abhi", "nav"));
+        mExampleList.add(new ExampleItem("abhi", "nav"));
 
-                            mExampleAdapter = new ExampleAdapter(MainActivity.this, mExampleList);
+
+
+
+
+
+        mExampleAdapter = new ExampleAdapter(MainActivity.this, mExampleList);
                             mRecyclerView.setAdapter(mExampleAdapter);
 
 
-                        } catch (JSONException e) {
-                            e.printStackTrace();
                         }
 
-                    }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                error.printStackTrace();
-            }
-        });
 
-        mRequestQueue.add(request);
-    }
+
+
+      //  mRequestQueue.add(request);
+
 }

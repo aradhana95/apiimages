@@ -5,6 +5,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -30,7 +31,7 @@ import java.util.ArrayList;
         }
 
         @Override
-        public void onBindViewHolder(ExampleViewHolder holder, int position) {
+        public void onBindViewHolder(final ExampleViewHolder holder, int position) {
             ExampleItem currentItem = mExampleList.get(position);
 
             String imageUrl = currentItem.getImageUrl();
@@ -39,7 +40,14 @@ import java.util.ArrayList;
 
            //holder.mTextViewCreator.setText(creatorName);
             holder.mTextViewLikes.setText("Likes: " + likeCount);
-            Picasso.with(mContext).load(imageUrl).fit().centerInside().into(holder.mImageView);
+            holder.textView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    holder.araEdit.setVisibility(View.VISIBLE);
+
+                }
+            });          //  Picasso.with(mContext).load(imageUrl).fit().centerInside().into(holder.mImageView);
         }
 
         @Override
@@ -48,15 +56,22 @@ import java.util.ArrayList;
         }
 
         public class ExampleViewHolder extends RecyclerView.ViewHolder {
-            public ImageView mImageView;
+           // public ImageView mImageView;
            // public TextView mTextViewCreator;
             public TextView mTextViewLikes;
+            public TextView textView;
+            public EditText araEdit;
+
+
+
+
 
             public ExampleViewHolder(View itemView) {
                 super(itemView);
-                mImageView = itemView.findViewById(R.id.image_view);
                // mTextViewCreator = itemView.findViewById(R.id.text_view_creator);
                 mTextViewLikes = itemView.findViewById(R.id.text_view_likes);
+                textView =  itemView.findViewById(R.id.text_iew_lik);
+                araEdit =  itemView.findViewById(R.id.text_viw_ik);
             }
         }
     }
